@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
   <title>Spiritual Eyes</title>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
   <style>
+
     body{
       background:black;
       color:white;
@@ -34,7 +39,9 @@
       padding:20px;
       border:1px solid #444;
     }
+
   </style>
+
 </head>
 
 <body>
@@ -66,66 +73,95 @@ style="border:none;">
 
 <script>
 
+const SUPABASE_URL =
+"https://xbemkmvvbkxknuduthsg.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_mUNYUtotJGrESIeSu0HrVg_WxzGWqqvC";
+
+const client =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
 async function unlockBook(){
 
   let userKey =
   document.getElementById("key").value;
 
-  let response =
-  await fetch("keys.json");
+  let msg =
+  document.getElementById("msg");
 
-  let data =
-  await response.json();
+  // get license from Supabase
+  let { data, error } =
+  await client
+  .from("licenses")
+  .select("*")
+  .eq("key", userKey)
+  .single();
 
+  if(error || !data){
+
+    msg.innerHTML =
+    "Invalid License ❌";
+
+    return;
+  }
+
+  // blocked license
+  if(data.status !== "active"){
+
+    msg.innerHTML =
+    "License Blocked ❌";
+
+    return;
+  }
+
+  // local device id
   let deviceID =
   localStorage.getItem("deviceID");
 
   if(!deviceID){
+
     deviceID =
-    "DEV-" + Math.random().toString(36).substring(2);
-    localStorage.setItem("deviceID", deviceID);
+    "DEV-" +
+    Math.random().toString(36).substring(2);
+
+    localStorage.setItem(
+      "deviceID",
+      deviceID
+    );
   }
 
-  let license =
-  data.licenses.find(l => l.key === userKey);
+  // first device lock
+  if(!data.device_id){
 
-  if(!license){
+    await client
+    .from("licenses")
+    .update({
+      device_id: deviceID
+    })
+    .eq("id", data.id);
 
-    document.getElementById("msg")
-    .innerHTML = "Invalid Key ❌";
+    data.device_id = deviceID;
+  }
+
+  // device mismatch
+  if(data.device_id !== deviceID){
+
+    msg.innerHTML =
+    "This license is already used on another device ❌";
 
     return;
   }
 
-  if(license.status !== "active"){
+  // access granted
+  document.getElementById("book")
+  .style.display = "block";
 
-    document.getElementById("msg")
-    .innerHTML = "❌ License blocked";
-
-    return;
-  }
-
-  // first use → bind device
-  if(!license.device){
-    license.device = deviceID;
-  }
-
-  // check device match
-  if(license.device === deviceID){
-
-    document.getElementById("book")
-    .style.display = "block";
-
-    document.getElementById("msg")
-    .innerHTML = "Access Granted ✔";
-
-  } else {
-
-    document.getElementById("msg")
-    .innerHTML =
-    "❌ License already used on another device";
-
-  }
+  msg.innerHTML =
+  "Access Granted ✔";
 
 }
 
