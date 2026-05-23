@@ -77,7 +77,41 @@ async function unlockBook(){
   let data =
   await response.json();
 
-  if(data.keys.includes(userKey)){
+  let deviceID =
+  localStorage.getItem("deviceID");
+
+  if(!deviceID){
+    deviceID =
+    "DEV-" + Math.random().toString(36).substring(2);
+    localStorage.setItem("deviceID", deviceID);
+  }
+
+  let license =
+  data.licenses.find(l => l.key === userKey);
+
+  if(!license){
+
+    document.getElementById("msg")
+    .innerHTML = "Invalid Key ❌";
+
+    return;
+  }
+
+  if(license.status !== "active"){
+
+    document.getElementById("msg")
+    .innerHTML = "❌ License blocked";
+
+    return;
+  }
+
+  // first use → bind device
+  if(!license.device){
+    license.device = deviceID;
+  }
+
+  // check device match
+  if(license.device === deviceID){
 
     document.getElementById("book")
     .style.display = "block";
@@ -85,10 +119,11 @@ async function unlockBook(){
     document.getElementById("msg")
     .innerHTML = "Access Granted ✔";
 
-  }else{
+  } else {
 
     document.getElementById("msg")
-    .innerHTML = "Invalid Key ❌";
+    .innerHTML =
+    "❌ License already used on another device";
 
   }
 
