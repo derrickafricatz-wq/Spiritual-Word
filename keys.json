@@ -1,5 +1,14 @@
 {
-  "keys": [
-    "SE-1001"
+  "licenses": [
+    {
+      "key": "SE-1001",
+      "status": "active",
+      "device": null
+    },
+    {
+      "key": "SE-1002",
+      "status": "active",
+      "device": null
+    }
   ]
 }
