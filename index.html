@@ -112,6 +112,21 @@
 
       document.getElementById("book").style.display = "block";
       msg.innerHTML = "Access Granted ✔";
+
+      // STEP: create secure link from Supabase storage
+let { data, error } = await client
+  .storage
+  .from('books')
+  .createSignedUrl('learn.pdf', 60 * 10); // 10 minutes access
+
+if (error) {
+  msg.innerHTML = "Failed to load book ❌";
+  return;
+}
+
+// show secure PDF
+document.getElementById("book").innerHTML =
+  `<iframe src="${data.signedUrl}" width="100%" height="700px" style="border:none;"></iframe>`;
     }
 
 </script>
