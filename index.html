@@ -49,19 +49,10 @@
 
 <body>
 
-  <button id="installBtn" style="
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  padding:10px;
-  background:#00ffff;
-  border:none;
-  border-radius:10px;
-  display:none;
-  z-index:200;
-">
-Install App
-</button>
+  <button id="installBtn"
+    style="position:fixed;bottom:20px;right:20px;padding:10px;background:#00ffff;border:none;border-radius:10px;display:none;z-index:200;">
+    Install App
+  </button>
 
 <h1>🔐 Spiritual Eyes</h1>
 
@@ -176,6 +167,14 @@ async function unlockBook(){
 
 }
 
+</script>
+
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+    .then(() => console.log("SW registered"))
+    .catch(err => console.log("SW failed", err));
+}
 </script>
 
 </body>
