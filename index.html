@@ -112,42 +112,6 @@
 
       document.getElementById("book").style.display = "block";
       msg.innerHTML = "Access Granted ✔";
-
-let result = await client
-  .storage
-  .from('books')
-  .createSignedUrl('learn.pdf', 60 * 10);
-
-if (result.error) {
-  console.log(result.error);
-  msg.innerHTML = "Failed to load book ❌ (check storage)";
-  return;
-}
-
-let signedUrl = result.data.signedUrl;
-
-document.getElementById("book").innerHTML =
-  `<iframe src="${signedUrl}" width="100%" height="700px" style="border:none;"></iframe>`;
-    }
-
-   // Block right click
-document.addEventListener("contextmenu", e => e.preventDefault());
-
-// Block save / print / source
-document.addEventListener("keydown", function(e) {
-
-  if (
-    e.ctrlKey &&
-    (
-      e.key === "s" ||
-      e.key === "p" ||
-      e.key === "u"
-    )
-  ) {
-    e.preventDefault();
-  }
-
-}); 
     
 
 </script>
