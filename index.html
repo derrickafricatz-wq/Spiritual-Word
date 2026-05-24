@@ -4,9 +4,6 @@
 <head>
   <title>Spiritual Eyes</title>
 
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#00ffff">
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
   <style>
@@ -44,11 +41,6 @@
 </head>
 
 <body>
-
-  <button id="installBtn"
-    style="position:fixed;bottom:20px;right:20px;padding:10px;background:#00ffff;border:none;border-radius:10px;display:none;z-index:200;">
-    Install App
-  </button>
 
   <h1>🔐 Spiritual Eyes</h1>
 
@@ -123,30 +115,7 @@
       document.getElementById("book").style.display = "block";
       msg.innerHTML = "Access Granted ✔";
     }
-  </script>
 
-  <!-- ✅ SERVICE WORKER REGISTER -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js')
-        .then(() => console.log("SW registered"))
-        .catch(err => console.log("SW failed", err));
-    }
-
-    let deferredPrompt;
-
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById("installBtn").style.display = "block";
-    });
-
-    document.getElementById("installBtn").addEventListener("click", async () => {
-      deferredPrompt.prompt();
-      await deferredPrompt.userChoice;
-      deferredPrompt = null;
-    });
-  </script>
-
+</script>
 </body>
 </html>
