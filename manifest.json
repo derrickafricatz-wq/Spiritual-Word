@@ -1,15 +1,12 @@
 {
-  "name": "In His Words, We Walk In Perfection",
-  "short_name": "Spiritual Word",
-
-  "start_url": "./index.html",
+  "name": "Spiritual Eyes",
+  "short_name": "Spiritual",
+  "start_url": "./",
   "scope": "./",
-
-  "display": "fullscreen",
-  "orientation": "landscape",
-
+  "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#00ffff",
+  "orientation": "portrait",
 
   "icons": [
     {
