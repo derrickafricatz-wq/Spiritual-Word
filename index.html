@@ -119,6 +119,20 @@
      `<iframe src="learn.pdf" width="100%" height="700px" style="border:none;"></iframe>`;
 
     }
+
+    function readBook() {
+
+  let text =
+    "Welcome to Spiritual Eyes. This is the audio reading system.";
+
+  let speech = new SpeechSynthesisUtterance(text);
+
+  speech.lang = "en-US";
+  speech.rate = 1;
+
+  window.speechSynthesis.speak(speech);
+
+}
     
 
 </script>
