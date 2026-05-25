@@ -173,6 +173,9 @@
 
   let text = await getPageText(pageNum);
 
+  let words = text.split(" ");
+  console.log(words); 
+
   if (!text || text.trim().length === 0) return;
 
   let speech = new SpeechSynthesisUtterance(text);
