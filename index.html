@@ -144,18 +144,24 @@
 
       }
 
-    function readBook() {
+    async function readBook() {
 
-  let text =
-    "Welcome to Spiritual Eyes. This is the audio reading system.";
+  if (!pdfDoc) return;
+
+  let text = await getPageText(pageNum);
+
+  if (!text || text.trim().length === 0) {
+    alert("No text found on this page");
+    return;
+  }
 
   let speech = new SpeechSynthesisUtterance(text);
 
   speech.lang = "en-US";
   speech.rate = 1;
 
+  window.speechSynthesis.cancel(); // stop old audio
   window.speechSynthesis.speak(speech);
-
 }
 
     async function renderPDF() {
