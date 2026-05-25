@@ -4,18 +4,6 @@
 <head>
   <title>Spiritual Eyes</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="theme-color" content="#000000">
-
-  <meta name="apple-mobile-web-app-capable" content="yes">
-
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta name="mobile-web-app-capable" content="yes">
-
-  <link rel="manifest" href="manifest.json">
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -268,14 +256,6 @@ document.getElementById("speed").addEventListener("input", function () {
   speechSpeed = parseFloat(this.value);
   document.getElementById("speedValue").innerText = speechSpeed;
 });  
-
-  if ("serviceWorker" in navigator) {
-
-  navigator.serviceWorker.register("./service-worker.js")
-
-    .then(() => console.log("Service Worker Registered"));
-
-  }
     
 
 </script>
