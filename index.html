@@ -174,9 +174,19 @@
   let text = await getPageText(pageNum);
 
   let words = text.split(" ");
-  words[0] = `<span style="background:yellow;color:black;">${words[0]}</span>`;
+  let currentIndex = 0;
 
-  document.getElementById("textLayer").innerHTML = words.join(" ");
+function updateHighlight() {
+
+  let displayWords = [...words];
+
+  displayWords[currentIndex] =
+    `<span style="background:yellow;color:black;">${displayWords[currentIndex]}</span>`;
+
+  document.getElementById("textLayer").innerHTML =
+    displayWords.join(" ");
+
+}
 
   if (!text || text.trim().length === 0) return;
 
