@@ -80,19 +80,6 @@
 
   <canvas id="pdf-render"></canvas>
 
-  <div id="textLayer" style="
-  margin-top:20px;
-  padding:15px;
-  text-align:left;
-  line-height:1.6;
-  font-size:18px;
-  max-width:800px;
-  margin-left:auto;
-  margin-right:auto;
-  background:#111;
-  border-radius:10px;
-"></div> 
-
   </div>
 
   <script>
@@ -112,8 +99,6 @@
     let ctx = null;
     let currentSpeech = null;
     let speechSpeed = 1;
-    let currentWords = [];
-    let highlightIndex = 0;
 
     async function unlockBook() {
 
@@ -171,48 +156,28 @@
 
     async function readBook() {
 
+  if (!pdfDoc) return;
+
   let text = await getPageText(pageNum);
 
-  let words = text.split(" ");
-  let currentIndex = 0;
-
-function updateHighlight() {
-
-  let displayWords = [...words];
-
-  displayWords[currentIndex] =
-    `<span style="background:yellow;color:black;">${displayWords[currentIndex]}</span>`;
-
-  document.getElementById("textLayer").innerHTML =
-    displayWords.join(" ");
-
-}
-
-  if (!text || text.trim().length === 0) return;
+  if (!text || text.trim().length === 0) {
+    alert("No text found on this page");
+    return;
+  }
 
   let speech = new SpeechSynthesisUtterance(text);
 
   speech.lang = "en-US";
   speech.rate = speechSpeed;
 
+  if (currentSpeech) {
   window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(speech);
 }
 
-    updateHighlight();
+currentSpeech = speech;
 
-let highlightTimer = setInterval(() => {
-
-  currentIndex++;
-
-  if (currentIndex >= words.length) {
-    clearInterval(highlightTimer);
-    return;
-  }
-
-  updateHighlight();
-
-  }, 300);
+window.speechSynthesis.speak(speech);
+}
 
     async function renderPDF() {
 
@@ -243,10 +208,6 @@ let highlightTimer = setInterval(() => {
 
   document.getElementById("pageNum").innerText = "Page: " + num;
 }
-
-  getPageText(num).then(text => {
-  document.getElementById("textLayer").innerText = text;
-}); 
 
     function nextPage() {
 
