@@ -171,27 +171,17 @@
 
     async function readBook() {
 
-  if (!pdfDoc) return;
-
   let text = await getPageText(pageNum);
 
-  if (!text || text.trim().length === 0) {
-    alert("No text found on this page");
-    return;
-  }
+  if (!text || text.trim().length === 0) return;
 
   let speech = new SpeechSynthesisUtterance(text);
 
   speech.lang = "en-US";
   speech.rate = speechSpeed;
 
-  if (currentSpeech) {
   window.speechSynthesis.cancel();
-}
-
-currentSpeech = speech;
-
-window.speechSynthesis.speak(speech);
+  window.speechSynthesis.speak(speech);
 }
 
     async function renderPDF() {
