@@ -158,31 +158,17 @@
 
 }
 
-  async function renderPDF() {
+    async function renderPDF() {
 
   const url = 'learn.pdf';
 
-  const pdf = await pdfjsLib.getDocument(url).promise;
+  pdfDoc = await pdfjsLib.getDocument(url).promise;
 
-  const page = await pdf.getPage(1);
+  canvas = document.getElementById('pdf-render');
+  ctx = canvas.getContext('2d');
 
-  const scale = 1.5;
-
-  const viewport = page.getViewport({ scale });
-
-  const canvas = document.getElementById('pdf-render');
-
-  const context = canvas.getContext('2d');
-
-  canvas.height = viewport.height;
-  canvas.width = viewport.width;
-
-  await page.render({
-    canvasContext: context,
-    viewport: viewport
-  }).promise;
-
-}  
+  renderPage(pageNum);
+}
     
 
 </script>
