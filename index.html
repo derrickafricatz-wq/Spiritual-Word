@@ -80,6 +80,19 @@
 
   <canvas id="pdf-render"></canvas>
 
+  <div id="textLayer" style="
+  margin-top:20px;
+  padding:15px;
+  text-align:left;
+  line-height:1.6;
+  font-size:18px;
+  max-width:800px;
+  margin-left:auto;
+  margin-right:auto;
+  background:#111;
+  border-radius:10px;
+"></div> 
+
   </div>
 
   <script>
@@ -99,6 +112,8 @@
     let ctx = null;
     let currentSpeech = null;
     let speechSpeed = 1;
+    let currentWords = [];
+    let highlightIndex = 0;
 
     async function unlockBook() {
 
