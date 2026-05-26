@@ -1,12 +1,12 @@
-const CACHE_NAME = "spiritual-eyes-cache";
+const CACHE_NAME = "spiritual-Word";
 
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
   "./manifest.json",
   "./learn.pdf",
-  "./icon-192.png",
-  "./icon-512.png"
+  "./https://i.imgur.com/mwkZeR2.jpeg",
+  "./https://i.imgur.com/mwkZeR2.jpeg"
 ];
 
 self.addEventListener("install", (event) => {
