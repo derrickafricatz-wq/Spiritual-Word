@@ -485,6 +485,12 @@ window.addEventListener("appinstalled", () => {
   renderPage(pageNum);
 
     }
+
+    window.addEventListener("resize", () => {
+  if (pdfDoc) {
+    renderPage(pageNum);
+  }
+});
     
 </script>
 </body>
