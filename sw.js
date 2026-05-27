@@ -14,10 +14,19 @@ self.addEventListener("message", (event) => {
 });
 
 self.addEventListener('install', async (event) => {
-  event.waitUntil(
-    caches.open(CACHE)
-      .then((cache) => cache.add(offlineFallbackPage))
-  );
+ event.waitUntil(
+  caches.open(CACHE).then((cache) => {
+    return cache.addAll([
+      "./",
+      "./index.html",
+      "./voice.pdf",
+      "./offline.html",
+      "./icon-192.png",
+      "./icon-512.png",
+      "./icon-512-maskable.png"
+    ]);
+  })
+); 
 });
 
 if (workbox.navigationPreload.isSupported()) {
