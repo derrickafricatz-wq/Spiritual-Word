@@ -2,8 +2,8 @@
   "name": "In His Words, We Walk In Perfection",
   "short_name": "Spiritual Word",
   "id": "com.spiritualword.app",
-  "start_url": "/Spiritual-Word/",
-"scope": "/Spiritual-Word/"
+  "start_url": "/index.html",
+  "scope": "./",
   "display": "standalone",
   "display_override": [
     "standalone",
