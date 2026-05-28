@@ -281,30 +281,52 @@
 
       }
 
-    async function readBook() {
+    let isSpeaking = false;
 
-if (!pdfDoc) return;
+async function readBook() {
 
-let text = await getPageText(pageNum);
+  if (!pdfDoc) return;
 
-if (!text || text.trim().length === 0) {
-  alert("No text found on this page");
-  return;
-}
+  // 🚫 block spam tapping
+  if (isSpeaking) return;
+  isSpeaking = true;
 
-let speech = new SpeechSynthesisUtterance(text);
+  startCountdown(async () => {
 
-speech.lang = "en-US";
-speech.rate = speechSpeed;
+    try {
+      let text = await getPageText(pageNum);
 
-currentSpeech = speech;
+      if (!text || text.trim().length === 0) {
+        alert("No text found on this page");
+        isSpeaking = false;
+        return;
+      }
 
-window.speechSynthesis.cancel();
+      // stop anything already speaking
+      window.speechSynthesis.cancel();
 
-setTimeout(() => {
-  window.speechSynthesis.speak(speech);
-}, 200);
-}
+      let speech = new SpeechSynthesisUtterance(text);
+
+      speech.lang = "en-US";
+      speech.rate = speechSpeed;
+
+      speech.onend = () => {
+        isSpeaking = false;
+      };
+
+      speech.onerror = () => {
+        isSpeaking = false;
+      };
+
+      window.speechSynthesis.speak(speech);
+
+    } catch (e) {
+      console.log(e);
+      isSpeaking = false;
+    }
+
+  });
+}p
 
     function startCountdown(callback) {
   let box = document.getElementById("countdown");
