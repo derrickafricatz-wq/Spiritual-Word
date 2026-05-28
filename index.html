@@ -61,9 +61,6 @@
 
   transform: translate(-50%, -50%);
 
-  max-width: 95vw;
-  max-height: 95vh;
-
   display: block;
     }
 
@@ -315,7 +312,7 @@ window.speechSynthesis.speak(speech);
   const scaleX = screenWidth / viewport.width;
   const scaleY = screenHeight / viewport.height;
 
-  const scale = Math.min(scaleX, scaleY) * 4;
+  const scale = Math.min(scaleX, scaleY) * 2.5;
 
   const scaledViewport = page.getViewport({ scale });
 
