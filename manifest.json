@@ -1,6 +1,8 @@
+```json
 {
   "name": "In His Words, We Walk In Perfection",
   "short_name": "Holly Echo",
+  "description": "Where Holly Words Echo Through Every Heart.",
   "start_url": "/Holly-Echo/",
   "scope": "/Holly-Echo/",
   "display": "standalone",
@@ -8,10 +10,17 @@
     "standalone",
     "window-controls-overlay"
   ],
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "background_color": "#544545",
   "theme_color": "#1f2323",
-  "description": "Spiritual Word is a powerful offline-ready digital book reader with audio narration, designed for spiritual growth and daily inspiration.",
+  "lang": "en",
+  "dir": "auto",
+  "id": "com.hollyecho.app",
+  "categories": [
+    "books",
+    "education",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "icon-192.png",
@@ -32,15 +41,10 @@
       "purpose": "maskable"
     }
   ],
-  "dir": "auto",
-  "lang": "en",
-  "categories": [
-    "books",
-    "education",
-    "lifestyle"
-  ],
-  "id": "com.spiritualword.app",
   "share_target": {
-    "method": "GET"
+    "action": "/Holly-Echo/",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded"
   }
 }
+```
