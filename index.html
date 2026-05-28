@@ -290,6 +290,8 @@
 
      renderPDF();
 
+     startApologyLoop();
+
      }, 1000);
 
       }
@@ -435,6 +437,24 @@ function prevPage() {
   pageNum--;
   renderPage(pageNum);
 }
+
+    function startApologyLoop() {
+  let box = document.getElementById("apologyMsg");
+
+  const messages = [
+    "⚠ Sorry, voice may misread some words",
+    "⚠ We are improving reading quality"
+  ];
+
+  let i = 0;
+
+  box.innerText = messages[0];
+
+  setInterval(() => {
+    i = (i + 1) % messages.length;
+    box.innerText = messages[i];
+  }, 5000);
+    }
 
     async function getPageText(pageNumber) {
   const page = await pdfDoc.getPage(pageNumber);
