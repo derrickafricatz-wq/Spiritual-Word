@@ -296,13 +296,10 @@
 
       }
 
-    let isSpeaking = false;
-
-async function readBook() {
+    async function readBook() {
 
   if (!pdfDoc) return;
 
-  // 🚫 block spam tapping
   if (isSpeaking) return;
   isSpeaking = true;
 
@@ -312,12 +309,10 @@ async function readBook() {
       let text = await getPageText(pageNum);
 
       if (!text || text.trim().length === 0) {
-        alert("No text found on this page");
         isSpeaking = false;
         return;
       }
 
-      // stop anything already speaking
       window.speechSynthesis.cancel();
 
       let speech = new SpeechSynthesisUtterance(text);
@@ -333,7 +328,10 @@ async function readBook() {
         isSpeaking = false;
       };
 
-      window.speechSynthesis.speak(speech);
+      // 🔥 IMPORTANT FIX (some phones need delay)
+      setTimeout(() => {
+        window.speechSynthesis.speak(speech);
+      }, 300);
 
     } catch (e) {
       console.log(e);
@@ -341,7 +339,7 @@ async function readBook() {
     }
 
   });
-}
+    }
 
     function startCountdown(callback) {
   let box = document.getElementById("countdown");
