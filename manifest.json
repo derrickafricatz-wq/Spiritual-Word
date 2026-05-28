@@ -4,12 +4,12 @@
   "description": "Where Holly Words Echo Through Every Heart.",
   "start_url": "/Holly-Echo/",
   "scope": "/Holly-Echo/",
-  "display": "standalone",
+  "display": "fullscreen",
   "display_override": [
     "standalone",
     "window-controls-overlay"
   ],
-  "orientation": "portrait-primary",
+  "orientation": "landscape",
   "background_color": "#544545",
   "theme_color": "#1f2323",
   "lang": "en",
