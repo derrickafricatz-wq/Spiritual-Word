@@ -146,6 +146,24 @@
 
   <div id="book">
 
+    <div id="countdown" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  color: white;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
+  font-weight: bold;
+  z-index: 99999;
+">
+  5
+    </div>
+
   <!-- TOGGLE BUTTON -->
 
 <div id="toggleBtn" onclick="toggleControls()">
@@ -286,6 +304,26 @@ window.speechSynthesis.cancel();
 setTimeout(() => {
   window.speechSynthesis.speak(speech);
 }, 200);
+}
+
+    function startCountdown(callback) {
+  let box = document.getElementById("countdown");
+  let count = 5;
+
+  box.style.display = "flex";
+  box.innerText = count;
+
+  let timer = setInterval(() => {
+    count--;
+
+    if (count <= 0) {
+      clearInterval(timer);
+      box.style.display = "none";
+      callback(); // start voice here later
+    } else {
+      box.innerText = count;
+    }
+  }, 1000);
 }
   
 
