@@ -271,10 +271,16 @@
 
   let text = await getPageText(pageNum);
 
-  if (!text || text.trim().length === 0) {
-    alert("No text found on this page");
+  if (!text || text.trim().length < 3) {
+
+  // try OCR
+  text = await getPageTextOCR();
+
+  if (!text || text.trim().length < 3) {
+    alert("This page has no readable text");
     return;
   }
+}
 
   let speech = new SpeechSynthesisUtterance(text);
 
