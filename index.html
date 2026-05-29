@@ -381,6 +381,11 @@ function prevPage() {
   window.speechSynthesis.pause();
 }
 
+    function stopSpeech() {
+  window.speechSynthesis.cancel();
+  currentSpeech = null;
+    }
+
 document.getElementById("speed").addEventListener("input", function () {
   speechSpeed = parseFloat(this.value);
   document.getElementById("speedValue").innerText = speechSpeed;
