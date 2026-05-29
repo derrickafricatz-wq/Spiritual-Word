@@ -520,6 +520,34 @@ window.addEventListener("appinstalled", () => {
   installBtn.style.display = "none";
 
 });
+
+   const voiceMessages = [
+  "🔊 Voice reader is being improved for smoother experience. Please be patient.",
+  "⚙️ We are fixing voice issues to make reading more stable. Thank you for your patience."
+];
+
+let msgIndex = 0;
+
+function showVoiceNotice() {
+  const box = document.getElementById("voiceNotice");
+
+  if (!box) return;
+
+  box.innerText = voiceMessages[msgIndex];
+
+  // fade in
+  box.style.opacity = 1;
+
+  setTimeout(() => {
+    box.style.opacity = 0;
+  }, 4000);
+
+  msgIndex = (msgIndex + 1) % voiceMessages.length;
+}
+
+// start loop
+showVoiceNotice();
+setInterval(showVoiceNotice, 5000); 
     
 </script>
 </body>
