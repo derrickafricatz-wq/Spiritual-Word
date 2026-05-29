@@ -297,16 +297,6 @@
       return;
     }
 
-    // visual message
-    let box = document.getElementById("countdown");
-
-    box.style.display = "flex";
-    box.innerText = "🎙 Preparing Voice...";
-
-    setTimeout(() => {
-      box.style.display = "none";
-    }, 1000);
-
     let speech = new SpeechSynthesisUtterance(text);
 
     speech.lang = "en-US";
@@ -314,7 +304,7 @@
 
     currentSpeech = speech;
 
-    // start voice immediately
+    // start voice
     window.speechSynthesis.speak(speech);
 
   } catch (e) {
