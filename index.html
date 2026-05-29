@@ -300,52 +300,46 @@
 
   if (!pdfDoc) return;
 
-  // if already speaking, ignore spam taps
   if (isSpeaking) return;
-
   isSpeaking = true;
 
   startCountdown(async () => {
 
-    let text = "";
-
     try {
-      text = await getPageText(pageNum);
+      let text = await getPageText(pageNum);
+
+      if (!text || text.trim().length === 0) {
+        isSpeaking = false;
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      let speech = new SpeechSynthesisUtterance(text);
+
+      speech.lang = "en-US";
+      speech.rate = speechSpeed;
+
+      speech.onend = () => {
+        isSpeaking = false;
+      };
+
+      speech.onerror = () => {
+        isSpeaking = false;
+      };
+
+      // 🔥 IMPORTANT FIX (forces start on Android/Chrome)
+      setTimeout(() => {
+        window.speechSynthesis.speak(speech);
+      }, 300);
+
     } catch (e) {
       console.log(e);
       isSpeaking = false;
-      return;
     }
-
-    if (!text || text.trim().length === 0) {
-      isSpeaking = false;
-      return;
-    }
-
-    // always stop previous speech
-    window.speechSynthesis.cancel();
-
-    let speech = new SpeechSynthesisUtterance(text);
-
-    speech.lang = "en-US";
-    speech.rate = speechSpeed;
-
-    // 🔥 CRITICAL FIX: ALWAYS release lock
-    speech.onend = () => {
-      isSpeaking = false;
-    };
-
-    speech.onerror = () => {
-      isSpeaking = false;
-    };
-
-    // 🔥 extra safety: unlock even if browser fails event
-    setTimeout(() => {
-      window.speechSynthesis.speak(speech);
-    }, 250);
 
   });
-}
+    }
 
     function startCountdown(callback) {
   let box = document.getElementById("countdown");
