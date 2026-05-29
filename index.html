@@ -348,13 +348,10 @@ window.speechSynthesis.speak(speech);
 }
 
 function prevPage() {
-
-  if (currentSpeech) {
-    window.speechSynthesis.cancel();
-    currentSpeech = null;
-  }
-
   if (pageNum <= 1) return;
+
+  stopSpeech(); // 🔥 important
+
   pageNum--;
   renderPage(pageNum);
 }
