@@ -264,28 +264,29 @@
       }
 
     async function readBook() {
-
   if (!pdfDoc) return;
+
+  stopSpeech();
 
   let text = await getPageText(pageNum);
 
-  if (!text || text.trim().length === 0) {
-    alert("No text found on this page");
+  // 🔥 FIX 1: stronger empty check
+  if (!text || text.trim().length < 3) {
+    alert("This page has no readable text");
     return;
   }
+
+  // 🔥 FIX 2: normalize text (removes hidden spacing issues)
+  text = text.replace(/\s+/g, " ").trim();
 
   let speech = new SpeechSynthesisUtterance(text);
 
   speech.lang = "en-US";
   speech.rate = speechSpeed;
 
-  if (currentSpeech) {
-  window.speechSynthesis.cancel();
-}
+  currentSpeech = speech;
 
-currentSpeech = speech;
-
-window.speechSynthesis.speak(speech);
+  window.speechSynthesis.speak(speech);
 }
   
   async function renderPDF() {
