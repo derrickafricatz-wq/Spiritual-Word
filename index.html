@@ -264,30 +264,42 @@
       }
 
     async function readBook() {
+
   if (!pdfDoc) return;
 
-  stopSpeech();
+  // stop old speech safely
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+
+    // small delay fixes Android Chrome speech bug
+    await new Promise(resolve => setTimeout(resolve, 200));
+  }
 
   let text = await getPageText(pageNum);
 
-  // 🔥 FIX 1: stronger empty check
+  // no readable text
   if (!text || text.trim().length < 3) {
     alert("This page has no readable text");
     return;
   }
 
-  // 🔥 FIX 2: normalize text (removes hidden spacing issues)
+  // clean PDF weird spacing
   text = text.replace(/\s+/g, " ").trim();
 
   let speech = new SpeechSynthesisUtterance(text);
 
   speech.lang = "en-US";
   speech.rate = speechSpeed;
+  speech.pitch = 1;
+  speech.volume = 1;
 
   currentSpeech = speech;
 
+  // Android speech engine sometimes freezes
+  window.speechSynthesis.resume();
+
   window.speechSynthesis.speak(speech);
-}
+    }
   
   async function renderPDF() {
 
