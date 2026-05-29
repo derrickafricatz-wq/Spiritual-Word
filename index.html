@@ -121,6 +121,20 @@
   flex-wrap: nowrap;
 }
 
+   #apologyMsg{
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #00ffff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
   </style>
 </head>
 
@@ -143,40 +157,8 @@
 <button id="installBtn"> Install App </button>
 
   </div>
-
-  <div id="apologyMsg" style="
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.6);
-  color: #00ffff;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 11px;
-  z-index: 1000;
-  pointer-events: none;
-  "></div>
   
   <div id="book">
-
-    <div id="countdown" style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.85);
-  color: white;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  font-size: 80px;
-  font-weight: bold;
-  z-index: 99999;
-">
-  5
-    </div>
 
   <!-- TOGGLE BUTTON -->
 
