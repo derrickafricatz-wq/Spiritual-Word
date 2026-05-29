@@ -304,8 +304,9 @@
 
     currentSpeech = speech;
 
-    // start voice
-    window.speechSynthesis.speak(speech);
+    setTimeout(() => {
+  window.speechSynthesis.speak(speech);
+}, 500);
 
   } catch (e) {
     console.log(e);
