@@ -269,6 +269,8 @@
 
   if (!pdfDoc) return;
 
+  document.getElementById("pageNum").innerText = "Reading page...";
+
   let text = await getPageText(pageNum);
 
   if (!text || text.trim().length < 3) {
