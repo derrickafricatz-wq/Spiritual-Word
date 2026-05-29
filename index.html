@@ -296,6 +296,7 @@
 currentSpeech = speech;
 
 window.speechSynthesis.speak(speech);
+document.getElementById("pageNum").innerText = "Page: " + pageNum;
 }
   
   async function renderPDF() {
