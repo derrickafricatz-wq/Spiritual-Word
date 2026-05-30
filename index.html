@@ -11,8 +11,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-
   <style>
     body {
       background: black;
@@ -126,7 +124,7 @@
   #voiceNotice {
   position: fixed;
   bottom: 15px;
-  right: 15px;
+  left: 15px;
 
   background: rgba(0, 0, 0, 0.85);
   border: 1px solid #00ffff;
@@ -135,7 +133,7 @@
   padding: 10px 12px;
   border-radius: 10px;
 
-  font-size: 12px;
+  font-size: 14px;
   font-family: Arial;
 
   z-index: 99999;
@@ -209,8 +207,8 @@
 </div>
 
   <canvas id="pdf-render"></canvas>
-
-    <div id="voiceNotice">
+  
+  <div id="voiceNotice">
   🔊 Voice reader is being improved for smoother experience.
     </div>
 
@@ -298,20 +296,12 @@
 
   if (!pdfDoc) return;
 
-  document.getElementById("pageNum").innerText = "Reading page...";
-
   let text = await getPageText(pageNum);
 
-  if (!text || text.trim().length < 3) {
-
-  // try OCR
-  text = await getPageTextOCR();
-
-  if (!text || text.trim().length < 3) {
-    alert("This page has no readable text");
+  if (!text || text.trim().length === 0) {
+    alert("No text found on this page");
     return;
   }
-}
 
   let speech = new SpeechSynthesisUtterance(text);
 
@@ -325,7 +315,6 @@
 currentSpeech = speech;
 
 window.speechSynthesis.speak(speech);
-document.getElementById("pageNum").innerText = "Page: " + pageNum;
 }
   
   async function renderPDF() {
@@ -426,21 +415,6 @@ document.getElementById("speed").addEventListener("input", function () {
   document.getElementById("speedValue").innerText = speechSpeed;
 });
 
-    async function getPageTextOCR() {
-
-  const canvas = document.getElementById("pdf-render");
-
-  const result = await Tesseract.recognize(
-    canvas,
-    "eng",
-    {
-      logger: m => console.log(m)
-    }
-  );
-
-  return result.data.text;
-    }
-
     function toggleControls() {
 
   let controls = document.getElementById("controls");
@@ -521,7 +495,7 @@ window.addEventListener("appinstalled", () => {
 
 });
 
-   const voiceMessages = [
+const voiceMessages = [
   "🔊 Voice reader is being improved for smoother experience. Please be patient.",
   "⚙️ We are fixing voice issues to make reading more stable. Thank you for your patience."
 ];
