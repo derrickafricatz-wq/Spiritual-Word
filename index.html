@@ -587,7 +587,7 @@ function showVoiceNotice() {
 showVoiceNotice();
 setInterval(showVoiceNotice, 5000); 
 
-    let headerIndex = 0;
+   let headerIndex = 0;
 
 const headerTexts = [
   "FAST. EASY.",
@@ -613,25 +613,17 @@ function startHeaderLoop() {
     const text = headerTexts[headerIndex % headerTexts.length];
     const word = uniqueWords[headerIndex % uniqueWords.length];
 
+    // ONLY update text + word (NO button here)
     promo.innerHTML = `
       ⚡ ${text}
       <span style="color:#00ffff;font-weight:bold;margin-left:6px;">
         ${word}
       </span>
-      <button style="
-        margin-left:10px;
-        padding:4px 10px;
-        border:none;
-        border-radius:12px;
-        font-weight:bold;
-        cursor:pointer;
-        background:white;
-      ">
-        OPEN
-      </button>
     `;
 
-    // small pulse animation for bucket
+    // keep your real OPEN button untouched (HTML one)
+
+    // bucket animation
     cart.style.transform = "scale(1.2)";
     setTimeout(() => {
       cart.style.transform = "scale(1)";
@@ -642,7 +634,7 @@ function startHeaderLoop() {
   }, 3000);
 }
 
-startHeaderLoop();
+startHeaderLoop(); 
     
 </script>
 </body>
