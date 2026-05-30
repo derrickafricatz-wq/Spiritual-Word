@@ -414,6 +414,10 @@ function prevPage() {
   window.speechSynthesis.pause();
 }
 
+    function resumeVoice() {
+  window.speechSynthesis.resume();
+    }
+
 document.getElementById("speed").addEventListener("input", function () {
   speechSpeed = parseFloat(this.value);
   document.getElementById("speedValue").innerText = speechSpeed;
