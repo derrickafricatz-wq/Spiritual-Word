@@ -723,9 +723,6 @@ startHeaderLoop();
   function openBook(title) {
   const book = books.find(b => b.title === title);
 
-  function openBook(title) {
-  const book = books.find(b => b.title === title);
-
   if (book.locked) {
     alert("🔒 This book is locked.");
   } else {
