@@ -726,9 +726,15 @@ startHeaderLoop();
   if (book.locked) {
     alert("🔒 This book is locked.");
   } else {
+
   document.getElementById("storePanel").style.display = "none";
 
-  alert("📖 Opening: " + title);
+  document.getElementById("licenseScreen").style.display = "none";
+
+  document.getElementById("book").style.display = "block";
+
+  renderPDF();
+
   }
 }
     
