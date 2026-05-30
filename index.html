@@ -586,6 +586,63 @@ function showVoiceNotice() {
 // start loop
 showVoiceNotice();
 setInterval(showVoiceNotice, 5000); 
+
+    let headerIndex = 0;
+
+const headerTexts = [
+  "FAST. EASY.",
+  "SHOP IN OUR FREE APP TODAY",
+  "GET INSTANT ACCESS",
+  "UNLOCK YOUR LIBRARY"
+];
+
+const uniqueWords = [
+  "BLAZE",
+  "NOVA",
+  "ORBIT",
+  "ZEN",
+  "KARMA"
+];
+
+function startHeaderLoop() {
+  const promo = document.getElementById("promoText");
+  const cart = document.getElementById("cartCount");
+
+  setInterval(() => {
+
+    const text = headerTexts[headerIndex % headerTexts.length];
+    const word = uniqueWords[headerIndex % uniqueWords.length];
+
+    promo.innerHTML = `
+      ⚡ ${text}
+      <span style="color:#00ffff;font-weight:bold;margin-left:6px;">
+        ${word}
+      </span>
+      <button style="
+        margin-left:10px;
+        padding:4px 10px;
+        border:none;
+        border-radius:12px;
+        font-weight:bold;
+        cursor:pointer;
+        background:white;
+      ">
+        OPEN
+      </button>
+    `;
+
+    // small pulse animation for bucket
+    cart.style.transform = "scale(1.2)";
+    setTimeout(() => {
+      cart.style.transform = "scale(1)";
+    }, 200);
+
+    headerIndex++;
+
+  }, 3000);
+}
+
+startHeaderLoop();
     
 </script>
 </body>
