@@ -1,7 +1,7 @@
 const sponsors = [
   {
     id: 1,
-    title: "Spiritual Intro",
-    video: "videos/intro.mp4"
+    title: "In His Words. We Walk In Perfection",
+    video: "videos/com.mp4"
   }
 ];
