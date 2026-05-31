@@ -420,6 +420,11 @@
 
       }
 
+    function updateCart() {
+   document.getElementById("cartCount").innerText =
+    "🛒 [" + unlockedBooksSet.size + "]";
+    }
+
     async function readBook() {
 
   if (!pdfDoc) return;
