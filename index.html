@@ -338,15 +338,8 @@
   {
     title: "Spiritual Eyes",
     price: "$7",
-    locked: false,
-    pdf: "learn.pdf"
-  },
-
-  {
-    title: "Inner Peace Book",
-    price: "$4",
     locked: true,
-    pdf: "inner-peace.pdf"
+    pdf: "learn.pdf"
   }
 ];
 
@@ -398,6 +391,9 @@
       }
 
       msg.innerHTML = "Access Granted ✔";
+
+      unlockedBooksSet.add(selectedBookToUnlock.title);
+      updateCart();
 
       const bookToOpen = pendingUnlockBook || selectedBookToUnlock;
 
