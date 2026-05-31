@@ -599,6 +599,8 @@ document.getElementById("speed").addEventListener("input", function () {
 
   window.addEventListener("load", () => {
 
+    playSponsor();
+
     navigator.serviceWorker.register("./sw.js")
 
       .then(() => {
