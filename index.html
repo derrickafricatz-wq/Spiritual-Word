@@ -419,8 +419,14 @@
       }
 
     function updateCart() {
-   document.getElementById("cartCount").innerText =
+  document.getElementById("cartCount").innerText =
     "🛒 [" + unlockedBooksSet.size + "]";
+
+  // SAVE TO DEVICE STORAGE
+  localStorage.setItem(
+    "unlockedBooks",
+    JSON.stringify([...unlockedBooksSet])
+  );
     }
 
     async function readBook() {
