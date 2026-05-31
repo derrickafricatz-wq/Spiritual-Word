@@ -397,7 +397,14 @@
 
       msg.innerHTML = "Access Granted ✔";
 
-      selectedPDF = selectedBookToUnlock.pdf;
+      const bookToOpen = pendingUnlockBook || selectedBookToUnlock;
+
+      if (!bookToOpen) {
+      msg.innerHTML = "No book selected";
+      return;
+     }
+
+     selectedPDF = bookToOpen.pdf;
 
       setTimeout(() => {
 
